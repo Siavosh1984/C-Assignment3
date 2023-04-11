@@ -47,15 +47,15 @@ namespace SchoolApp.Controllers
             while (ResultSet.Read())
             {
                 //Access Column information by the DB column name as an index
-                     int TeacherId = (int)ResultSet["teacherid"];
-                     string TeacherFname = ResultSet["teacherfname"].ToString();
-                     string TeacherLname = ResultSet["teacherlname"].ToString();
-                     string EmployeeNumber = ResultSet["employeenumber"].ToString();
-                     string HireDate = ResultSet["hiredate"].ToString();
-                     string Salary = ResultSet["salary"].ToString();
+                int TeacherId = (int)ResultSet["teacherid"];
+                string TeacherFname = ResultSet["teacherfname"].ToString();
+                string TeacherLname = ResultSet["teacherlname"].ToString();
+                string EmployeeNumber = ResultSet["employeenumber"].ToString();
+                string HireDate = ResultSet["hiredate"].ToString();
+                string Salary = ResultSet["salary"].ToString();
 
                 Teacher NewTeacher = new Teacher();
-                
+
                 NewTeacher.TeacherId = TeacherId;
                 NewTeacher.TeacherFname = TeacherFname;
                 NewTeacher.TeacherLname = TeacherLname;
@@ -107,7 +107,7 @@ namespace SchoolApp.Controllers
                 string HireDate = ResultSet["hiredate"].ToString();
                 string Salary = ResultSet["salary"].ToString();
 
-             
+
 
                 NewTeacher.TeacherId = TeacherId;
                 NewTeacher.TeacherFname = TeacherFname;
@@ -120,5 +120,66 @@ namespace SchoolApp.Controllers
 
             return NewTeacher;
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <example>POST : /api/TeacherData/DeleteTeacher/3</example>
+
+        [HttpPost]
+
+        public void DeleteTeacher(int id)
+        {
+
+            //Create an instance of a connection
+            MySqlConnection Conn = School.AccessDatabase();
+
+            //Open the connection between the web server and database
+            Conn.Open();
+
+            //Establish a new command (query) for our database
+            MySqlCommand cmd = Conn.CreateCommand();
+
+            //SQL QUERY
+            cmd.CommandText = "Delete from teachers where teacherid=@id";
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Prepare();
+
+            cmd.ExecuteNonQuery();
+
+            Conn.Close();
+
+        }
+
+        [HttpPost]
+
+        public void AddTeacher(Teacher NewTeacher)
+        {
+
+            //Create an instance of a connection
+            MySqlConnection Conn = School.AccessDatabase();
+
+            //Open the connection between the web server and database
+            Conn.Open();
+
+            //Establish a new command (query) for our database
+            MySqlCommand cmd = Conn.CreateCommand();
+
+            //SQL QUERY
+            cmd.CommandText = "insert into teachers (teacherfname, teacherlname, employeenumber, hiredate, salary) values (@TeacherFname,@TeacherLname,@EmployeeNumber, @HireDate, @Salary)";
+            cmd.Parameters.AddWithValue("@TeacherFname", NewTeacher.TeacherFname);
+            cmd.Parameters.AddWithValue("@TeacherLname", NewTeacher.TeacherLname);
+            cmd.Parameters.AddWithValue("@EmployeeNumber", NewTeacher.EmployeeNumber);
+            cmd.Parameters.AddWithValue("@HireDate", NewTeacher.HireDate);
+            cmd.Parameters.AddWithValue("@Salary", NewTeacher.Salary);
+            cmd.Prepare();
+
+            cmd.ExecuteNonQuery();
+
+            Conn.Close();
+        }
+
     }
 }

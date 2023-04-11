@@ -33,5 +33,50 @@ namespace SchoolApp.Controllers
 
             return View(NewTeacher);
         }
+
+        //GET : /Teacher/DeleteConfirm/{id}
+        public ActionResult DeleteConfirm(int id)
+        {
+
+            TeachersDataController controller = new TeachersDataController();
+            Teacher NewTeacher = controller.FindTeacher(id);
+
+
+            return View(NewTeacher);
+
+        }
+
+        //POST : /Teacher/Delete/{id}
+
+        public ActionResult Delete(int id)
+        {
+            TeachersDataController controller = new TeachersDataController();
+            controller.DeleteTeacher(id);
+            return RedirectToAction("List");
+        }
+
+        //GET : /Teacher/New
+        public ActionResult New()
+        {
+            return View();
+        }
+
+        //POST : /Author/Create
+        [HttpPost]
+
+        public ActionResult Create(string TeacherFname, string TeacherLname, string EmployeeNumber, string HireDate, string Salary)
+        {
+            Teacher NewTeacher = new Teacher();
+            NewTeacher.TeacherFname = TeacherFname;
+            NewTeacher.TeacherLname = TeacherLname;
+            NewTeacher.EmployeeNumber = EmployeeNumber;
+            NewTeacher.HireDate = HireDate;
+            NewTeacher.Salary = Salary;
+            TeachersDataController controller = new TeachersDataController();
+            controller.AddTeacher(NewTeacher);
+
+            return RedirectToAction("List");
+        }
+
     }
 }
