@@ -1,7 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\SchoolApp",
+    "\\SchoolApp\\Controllers",
+    "\\SchoolApp\\Models",
+    "\\SchoolApp\\Views",
+    "\\SchoolApp\\Views\\Teacher"
   ],
-  "SelectedNode": "\\SchoolApp.sln",
+  "SelectedNode": "\\SchoolApp\\Views\\Teacher\\New.cshtml",
   "PreviewInSolutionExplorer": false
 }
