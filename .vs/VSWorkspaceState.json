@@ -7,6 +7,6 @@
     "\\SchoolApp\\Views",
     "\\SchoolApp\\Views\\Teacher"
   ],
-  "SelectedNode": "\\SchoolApp\\Views\\Teacher\\New.cshtml",
+  "SelectedNode": "\\SchoolApp\\Controllers\\TeachersDataController.cs",
   "PreviewInSolutionExplorer": false
 }
